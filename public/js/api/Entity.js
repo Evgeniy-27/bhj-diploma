@@ -3,14 +3,20 @@
  * Имеет свойство URL, равно пустой строке.
  * */
 class Entity {
-
+  static URL = '';
   /**
    * Запрашивает с сервера список данных.
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list( data, callback = f => f ) {
-
+  static list(data, callback = f => f) {
+    return createRequest({
+      url: this.url,
+      method: 'GET',
+      responseType: 'json',
+      data,
+      callback
+    });
   }
 
   /**
@@ -18,24 +24,44 @@ class Entity {
    * на сервер. (в зависимости от того,
    * что наследуется от Entity)
    * */
-  static create( data, callback = f => f ) {
-
+  static create(data, callback = f => f) {
+    const modifiedData = Object.assign({_method: "PUT"}, data);
+    return createRequest({
+      url: this.url,
+      method: 'POST',
+      responseType: 'json',
+      data: modifiedData,
+      callback
+    });
   }
 
   /**
    * Получает информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static get( id = '', data, callback = f => f ) {
-
+  static get(id = '', data, callback = f => f) {
+    return createRequest({
+      url: this.url,
+      method: 'GET',
+      responseType: 'json',
+      data,
+      callback
+    });
   }
 
   /**
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove( id = '', data, callback = f => f ) {
-
+  static remove(id = '', data, callback = f => f) {
+    const modifiedData = Object.assign({[id]: data}, {_method: "DELETE"});
+    return createRequest({
+      url: this.url,
+      method: 'POST',
+      responseType: 'json',
+      data: modifiedData,
+      callback
+    });
   }
 }
 
