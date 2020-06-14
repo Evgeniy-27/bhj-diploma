@@ -4,13 +4,14 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
-  static URL = '/user';
+  static url = '/user'
+
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
   static setCurrent(user) {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user))
   }
 
   /**
@@ -48,6 +49,7 @@ class User {
         callback.call(this, err, response);
       }
     });
+
   }
 
   /**
@@ -90,6 +92,7 @@ class User {
         callback.call(this, err, response);
       }
     });
+
   }
 
   /**
@@ -110,4 +113,6 @@ class User {
       }
     });
   }
+
+
 }

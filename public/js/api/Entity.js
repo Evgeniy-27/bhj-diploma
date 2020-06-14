@@ -11,10 +11,10 @@ class Entity {
    * */
   static list(data, callback = f => f) {
     return createRequest({
-      url: this.url,
-      method: 'GET',
-      responseType: 'json',
       data,
+      method: 'GET',
+      url: this.URL,
+      responseType: 'json',
       callback
     });
   }
@@ -25,12 +25,12 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback = f => f) {
-    const modifiedData = Object.assign({_method: "PUT"}, data);
+    let modifiedData = Object.assign({ _method: 'PUT' }, data);
     return createRequest({
-      url: this.url,
-      method: 'POST',
-      responseType: 'json',
       data: modifiedData,
+      method: 'POST',
+      url: this.URL,
+      responseType: 'json',
       callback
     });
   }
@@ -41,10 +41,10 @@ class Entity {
    * */
   static get(id = '', data, callback = f => f) {
     return createRequest({
-      url: this.url,
-      method: 'GET',
-      responseType: 'json',
       data,
+      method: 'GET',
+      url: this.URL + '/' + id,
+      responseType: 'json',
       callback
     });
   }
@@ -54,12 +54,12 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static remove(id = '', data, callback = f => f) {
-    const modifiedData = Object.assign({[id]: data}, {_method: "DELETE"});
+    let modifiedData = Object.assign({ _method: 'DELETE', id: id }, data);
     return createRequest({
-      url: this.url,
-      method: 'POST',
-      responseType: 'json',
       data: modifiedData,
+      method: 'POST',
+      url: this.URL + '/?id=' + id,
+      responseType: 'json',
       callback
     });
   }

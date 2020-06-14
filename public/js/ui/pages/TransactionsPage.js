@@ -12,7 +12,7 @@ class TransactionsPage {
    * */
   constructor(element) {
     if (!element) {
-      throw new Error('Элемент не существует');
+      throw new Error('Передан пустой элемент');
     }
     this.element = element;
     this.registerEvents();
@@ -32,18 +32,16 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
     this.element.addEventListener('click', (e) => {
       e.preventDefault();
-      let removeAccountBtn = e.target.closest('.remove-account');
-      let transactionBtn = e.target.closest('.transaction__remove');
+      const removeAccount = e.target.closest('.remove-account');
+      const transaction = e.target.closest('.transaction__remove');
 
-      if (removeAccountBtn) {
+      if (removeAccount) {
         this.removeAccount();
       }
-      if (transactionBtn) {
-        let id = transactionBtn.dataset.id;
-        this.removeTransaction(id);
+      if (transaction) {
+        this.removeTransaction(transaction.dataset.id);
       }
     });
   }
@@ -131,18 +129,27 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date) {
-    let formatDate = new Date(date);
+    const newDate = new Date(date);
+    const day = newDate.getDate() < 10 ? `0${newDate.getDate()}` : newDate.getDate();
+    const months = [
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
+      'декабря'];
+    const month = months[newDate.getMonth()];
+    const year = newDate.getFullYear();
+    const hours = newDate.getHours() < 10 ? `0${newDate.getHours()}` : newDate.getHours();
+    const minutes = newDate.getMinutes() < 10 ? `0${newDate.getMinutes()}` : newDate.getMinutes();
 
-    let options = {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      timezone: 'UTC',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-
-    return (formatDate.toLocaleString("ru", options));
+    return `${day} ${month} ${year} г. в ${hours}:${minutes}`;
   }
 
   /**
@@ -150,7 +157,7 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML(item) {
-    let dateTrans = this.formatDate(item.created_at);
+    const dateTrans = this.formatDate(item.created_at);
 
     return `<div class="transaction transaction_${item.type.toLowerCase()} row">
               <div class="col-md-7 transaction__details">
@@ -180,9 +187,11 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data) {
-    let content = document.querySelector('.content');
-
-    const itemsHTML = data.reverse().map(this.getTransactionHTML.bind(this)).join('');
-    content.innerHTML = `<div class="transactions-content">${itemsHTML}</div>`;
+    const content = document.querySelector('.content');
+    let account = '';
+    data.forEach(element => {
+      account += this.getTransactionHTML(element);
+    })
+    content.innerHTML = account;
   }
 }

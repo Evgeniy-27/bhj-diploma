@@ -6,6 +6,13 @@
       "password": "demo",
       "id": "1",
       "isAuthorized": false
+    },
+    {
+      "name": "Евгений",
+      "email": "vladimir@demo.ru",
+      "password": "1234",
+      "id": "8pwozb88kbeq2jj2",
+      "isAuthorized": true
     }
   ],
   "accounts": [
@@ -160,6 +167,54 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "8pwoz7ywkbeqkdmq",
+      "type": "INCOME",
+      "name": "а",
+      "sum": 25638,
+      "account_id": "8pwoz134kbeqjw33",
+      "created_at": "2020-06-14T07:17:14.881Z"
+    },
+    {
+      "id": "8pwozclskbf7u04i",
+      "type": "INCOME",
+      "name": "a",
+      "sum": 25638,
+      "account_id": "8pwoz8u4kbf7sqsb",
+      "created_at": "2020-06-14T15:20:37.409Z"
+    },
+    {
+      "id": "8pwozcw8kbfamf7w",
+      "type": "INCOME",
+      "name": "a",
+      "sum": 52786,
+      "account_id": "8pwozcxskbfam0u6",
+      "created_at": "2020-06-14T16:38:42.571Z"
+    },
+    {
+      "id": "8pwozdackbfay0b2",
+      "type": "EXPENSE",
+      "name": "nyu",
+      "sum": 25638,
+      "account_id": "8pwoz35gkbfaswem",
+      "created_at": "2020-06-14T16:47:43.117Z"
+    },
+    {
+      "id": "8pwozc2okbfay92x",
+      "type": "INCOME",
+      "name": "gn",
+      "sum": 455463,
+      "account_id": "8pwoz3fokbfaxipj",
+      "created_at": "2020-06-14T16:47:54.488Z"
+    },
+    {
+      "id": "8pwozb1wkbfayo7u",
+      "type": "EXPENSE",
+      "name": "ttb",
+      "sum": 500,
+      "account_id": "8pwoz3fokbfaxipj",
+      "created_at": "2020-06-14T16:48:14.105Z"
     }
   ]
 }

@@ -56,7 +56,6 @@ class Sidebar {
         if (!response.success) {
           return
         }
-        AccountsWidget.clear();
         App.setState('init');
       })
     })
